@@ -73,3 +73,63 @@ exports.create = async (req, res) => {
     throw err; // anything else is unexpected: let the error handler deal with it
   }
 };
+
+// GET /genres/:id/edit -> show the edit form, pre-filled
+exports.editForm = async (req, res) => {
+  const { id } = req.params;
+
+  const { rows } = await pool.query('SELECT * FROM genres WHERE id = $1', [id]);
+  const genre = rows[0];
+
+  if (!genre) {
+    return res.status(404).send('Genre not found');
+  }
+
+  res.render('genres/edit', {
+    genre,
+    error: null,
+    name: genre.name,
+    description: genre.description ?? '',
+  });
+};
+
+// POST /genres/:id/edit -> save the changes (mirrors create)
+exports.update = async (req, res) => {
+  // 1. Read the id from the URL and clean the input once
+  const { id } = req.params;
+  const name = (req.body.name ?? '').trim();
+  const description = (req.body.description ?? '').trim();
+
+  // Helper: re-show the form with a message and what the user already typed.
+  // `genre` only carries the id, which the form needs for its action URL.
+  const showError = (status, error) =>
+    res
+      .status(status)
+      .render('genres/edit', { genre: { id }, error, name, description });
+
+  // 2. Validate before touching the database
+  if (!name) {
+    return showError(400, 'Name is required.');
+  }
+
+  // 3. Save. An empty description is stored as NULL instead of ''
+  try {
+    const result = await pool.query(
+      'UPDATE genres SET name = $1, description = $2 WHERE id = $3',
+      [name, description || null, id],
+    );
+
+    // 4. No row matched this id: the genre doesn't exist
+    if (result.rowCount === 0) {
+      return res.status(404).send('Genre not found');
+    }
+
+    res.redirect(`/genres/${id}`);
+  } catch (err) {
+    // 23505 = unique_violation: another genre already has this name
+    if (err.code === '23505') {
+      return showError(409, `A genre named "${name}" already exists.`);
+    }
+    throw err; // anything unexpected: let the error handler deal with it
+  }
+};

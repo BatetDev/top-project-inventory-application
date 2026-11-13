@@ -15,13 +15,13 @@
 
     <form method="POST" action="/genres">
       <label for="name">Name</label>
-      <input type="text" name="name" id="name" value="<%= name || '' %>"/>
+      <input type="text" name="name" id="name" value="<%= name %>" required />
 
       <label for="description">Description</label>
-      <textarea name="description" id="description"><%= description || '' %></textarea>
+      <textarea name="description" id="description"><%= description %></textarea>
 
-      <button type="submit">Create Genre</button>
+      <button type="submit">Create genre</button>
+      <a href="/genres">Cancel</a>
     </form>
-    <a href="/genres" class="button">Back to Genres.</a>
   </body>
 </html>
