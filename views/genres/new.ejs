@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genres</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>New genre</h1>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <form method="POST" action="/genres">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" value="<%= name || '' %>"/>
+
+      <label for="description">Description</label>
+      <textarea name="description" id="description"><%= description || '' %></textarea>
+
+      <button type="submit">Create Genre</button>
+    </form>
+    <a href="/genres" class="button">Back to Genres.</a>
+  </body>
+</html>

@@ -37,3 +37,39 @@ exports.show = async (req, res) => {
   // 5. Hand both to views/genres/show.ejs
   res.render('genres/show', { genre, releases });
 };
+
+// GET  /genres/new -> show the empty form
+exports.newForm = (req, res) => {
+  res.render('genres/new', { error: null, name: '', description: '' });
+};
+
+// POST /genres -> save the submitted form
+exports.create = async (req, res) => {
+  // 1. Clean the input once, then use the clean values everywhere
+  const name = (req.body.name ?? '').trim();
+  const description = (req.body.description ?? '').trim();
+
+  // Helper: re-show the form with a message and what the user already typed
+  const showError = (status, error) =>
+    res.status(status).render('genres/new', { error, name, description });
+
+  // 2. Validate before touching the database
+  if (!name) {
+    return showError(400, 'Name is required.');
+  }
+
+  // 3. Save. An empty description is stored as NULL instead of ''
+  try {
+    await pool.query('INSERT INTO genres (name, description) VALUES ($1, $2)', [
+      name,
+      description || null,
+    ]);
+    res.redirect('/genres');
+  } catch (err) {
+    // 23505 = unique_violation: a genre with this name already exists
+    if (err.code === '23505') {
+      return showError(409, `A genre named "${name}" already exists.`);
+    }
+    throw err; // anything else is unexpected: let the error handler deal with it
+  }
+};
