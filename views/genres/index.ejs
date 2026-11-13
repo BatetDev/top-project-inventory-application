@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Genres</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Genres</h1>
+    <a href="/genres/new" class="button">New genre</a>
+
+    <% if (genres.length === 0) { %>
+      <p>No genres yet.</p>
+    <% } else { %>
+      <ul class="genre-list">
+        <% genres.forEach((genre) => { %>
+          <li class="genre">
+            <h2 class="genre-name">
+              <a href="/genres/<%= genre.id %>"><%= genre.name %></a>
+            </h2>
+            <% if (genre.description) { %>
+              <p class="genre-description"><%= genre.description %></p>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </body>
+</html>
