@@ -8,12 +8,20 @@
   </head>
   <body>
     <h1><%= genre.name %></h1>
+    <% if (error) { %>
+      <p class="error"><%= error %> </p>
+    <% } %>
+
     <% if (genre.description) { %>
       <p><%= genre.description %></p>
     <% } %>
 
     <div class="genre-actions">
       <a href="/genres/<%= genre.id %>/edit" class="button">Edit</a>
+
+      <form action="/genres/<%= genre.id %>/delete" method="POST" onsubmit="return confirm('Delete this genre?')">
+        <button type="submit">Delete</button>
+      </form>
     </div>
 
     <% if (releases.length === 0) { %>

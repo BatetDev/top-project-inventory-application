@@ -18,9 +18,7 @@ router.get('/:id/edit', genresController.editForm); // GET  /genres/:id/edit -> 
 
 router.post('/:id/edit', genresController.update); // POST /genres/:id/edit -> save the changes
 
-/*
 // Delete
 router.post('/:id/delete', genresController.remove); // POST /genres/:id/delete -> delete the genre
-*/
 
 module.exports = router;

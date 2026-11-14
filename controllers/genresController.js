@@ -1,5 +1,23 @@
 const pool = require('../db/pool');
 
+// Loads a genre and its releases, then renders the detail page.
+// Used by `show`, and by `remove` when a delete is refused.
+async function renderShow(res, id, { status = 200, error = null } = {}) {
+  const { rows } = await pool.query('SELECT * FROM genres WHERE id = $1', [id]);
+  const genre = rows[0];
+
+  if (!genre) {
+    return res.status(404).send('Genre not found');
+  }
+
+  const { rows: releases } = await pool.query(
+    'SELECT * FROM releases WHERE genre_id = $1 ORDER BY title',
+    [id],
+  );
+
+  res.status(status).render('genres/show', { genre, releases, error });
+}
+
 // GET /genres: show all genres (this is the app's home page)
 exports.index = async (req, res) => {
   // 1. Ask the database for all genres, sorted by name
@@ -11,32 +29,8 @@ exports.index = async (req, res) => {
   res.render('genres/index', { genres });
 };
 
-// GET /genres/:id: show one genre and the releases in it
-exports.show = async (req, res) => {
-  // 1. The id from the URL, e.g. /genres/3 -> "3" (always a string)
-  const { id } = req.params;
-
-  // 2. Find the genre
-  const { rows: genreRows } = await pool.query(
-    'SELECT * FROM genres WHERE id = $1',
-    [id],
-  );
-  const genre = genreRows[0]; // undefined if there is no such genre
-
-  // 3. No match: respond with 404 and stop
-  if (!genre) {
-    return res.status(404).send('Genre not found');
-  }
-
-  // 4. Find the releases that belong to this genre
-  const { rows: releases } = await pool.query(
-    'SELECT * FROM releases WHERE genre_id = $1 ORDER BY title',
-    [id],
-  );
-
-  // 5. Hand both to views/genres/show.ejs
-  res.render('genres/show', { genre, releases });
-};
+// GET /genres/:id -> one genre + its releases
+exports.show = (req, res) => renderShow(res, req.params.id);
 
 // GET  /genres/new -> show the empty form
 exports.newForm = (req, res) => {
@@ -131,5 +125,32 @@ exports.update = async (req, res) => {
       return showError(409, `A genre named "${name}" already exists.`);
     }
     throw err; // anything unexpected: let the error handler deal with it
+  }
+};
+
+// POST /genres/:id/delete -> delete the genre
+exports.remove = async (req, res) => {
+  // 1. Read the id from the URL
+  const { id } = req.params;
+  try {
+    // 2. Delete the row. rowCount = how many rows were deleted
+    const result = await pool.query('DELETE FROM genres WHERE id = $1', [id]);
+
+    // 3. Nothing deleted: no genre has this id
+    if (result.rowCount === 0) {
+      return res.status(404).send('Genre not found');
+    }
+
+    // 4. Success: the genre page no longer exists, so go back to the list
+    res.redirect('/genres');
+  } catch (err) {
+    // 23001 = restrict_violation (ON DELETE RESTRICT)
+    if (err.code === '23001') {
+      return renderShow(res, id, {
+        status: 409,
+        error: 'This genre still has releases. Delete or move them first.',
+      });
+    }
+    throw err;
   }
 };
