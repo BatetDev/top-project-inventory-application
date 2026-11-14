@@ -12,6 +12,10 @@
       <p><%= genre.description %></p>
     <% } %>
 
+    <div class="genre-actions">
+      <a href="/genres/<%= genre.id %>/edit" class="button">Edit</a>
+    </div>
+
     <% if (releases.length === 0) { %>
       <p>No releases for <%= genre.name %> yet.</p>
     <% } else { %>
