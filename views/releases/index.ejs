@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Releases</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1>Releases</h1>
+
+    <div class="page-actions">
+      <a href="/releases/new" class="button">New release</a>
+      <a href="/genres" class="button">Browse genres</a>
+    </div>
+
+    <% if (releases.length === 0) { %>
+      <p>No releases yet.</p>
+    <% } else { %>
+      <ul class="release-list">
+        <% releases.forEach((release) => { %>
+          <li class="release">
+            <% if (release.cover_url) { %>
+              <img class="release-cover" src="<%= release.cover_url %>" alt="Cover of <%= release.title %>" width="150" height="150" loading="lazy" />
+            <% } else { %>
+              <img class="release-cover" src="/images/no-cover.png" alt="No cover available" width="150" height="150" />
+            <% } %>
+
+            <h2 class="release-title">
+              <a href="/releases/<%= release.id %>"><%= release.title %></a>
+            </h2>
+            <p class="release-artist"><%= release.artist %></p>
+            <p class="release-genre">
+              <a href="/genres/<%= release.genre_id %>"><%= release.genre_name %></a>
+            </p>
+            <% if (release.year) { %>
+              <p class="release-year"><%= release.year %></p>
+            <% } %>
+            <% if (release.price !== null) { %>
+              <p class="release-price">$<%= release.price %></p>
+            <% } %>
+            <p class="release-stock"><%= release.stock %> in stock</p>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </body>
+</html>

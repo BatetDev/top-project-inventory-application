@@ -4,7 +4,7 @@ const path = require('node:path'); // built-in: builds file paths safely
 const express = require('express');
 
 const genresRouter = require('./routes/genresRouter');
-// const releasesRouter = require('./routes/releasesRouter');
+const releasesRouter = require('./routes/releasesRouter');
 
 // ---------- 2. App and config ----------
 const app = express(); // create the app object
@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true })); // parse <form> POST bodies int
 // ---------- 4. Routes ----------
 app.get('/', (req, res) => res.redirect('/genres'));
 app.use('/genres', genresRouter);
-// app.use('/releases', releasesRouter);
+app.use('/releases', releasesRouter);
 
 // ---------- 5. Fallbacks (must come after all routes) ----------
 app.use((req, res) => {
