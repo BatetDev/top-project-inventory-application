@@ -64,9 +64,9 @@ const SEED_RELEASES = `
   SELECT v.title, v.artist, g.id, v.year, v.price, v.stock, v.cover_url
   FROM (VALUES
     -- title,                      artist,                                        genre_name,              year, price, stock, cover_url
-    ('Chant',                      'Benedictine Monks of Santo Domingo de Silos', 'Gregorian Chant',       1994, 14.99, 12,    '/images/covers/schola-of-saint-aldric-chant.png'),
+    ('Chant',                      'Schola of Saint Aldric', 'Gregorian Chant',       1994, 14.99, 12,    '/images/covers/schola-of-saint-aldric-chant.png'),
     ('Missa Papae Marcelli',       'The Tallis Scholars',                         'Renaissance Polyphony', 1980, 16.50,  8,    NULL),
-    ('Songs of the Troubadours',   'Example Ensemble',                            'Troubadour Songs',      2001, 18.00,  5,    '/images/covers/ensemble-beaumont-songs-of-the-troubadours.png')
+    ('Songs of the Troubadours',   'Ensemble Beaumont',                            'Troubadour Songs',      2001, 18.00,  5,    '/images/covers/ensemble-beaumont-songs-of-the-troubadours.png')
   ) AS v(title, artist, genre_name, year, price, stock, cover_url)
   JOIN genres g ON g.name = v.genre_name;
 `;
