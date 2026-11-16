@@ -1,4 +1,4 @@
-const pool = require('../db/pool');
+const pool = require("../db/pool");
 
 // GET /releases: show all releases
 exports.index = async (req, res) => {
@@ -11,7 +11,7 @@ exports.index = async (req, res) => {
   `);
 
   // 2. Hand them to views/releases/index.ejs
-  res.render('releases/index', { releases });
+  res.render("releases/index", { releases });
 };
 
 // GET /releases/:id -> one release, with its genre's name
@@ -33,11 +33,70 @@ exports.show = async (req, res) => {
 
   // 3. No match: respond with 404 and stop
   if (!release) {
-    return res.status(404).send('Release not found');
+    return res.status(404).send("Release not found");
   }
 
   // 4. Hand it to views/releases/show.ejs
-  res.render('releases/show', { release });
+  res.render("releases/show", { release });
+};
+
+// GET /releases/new -> show the empty form
+exports.newForm = async (req, res) => {
+  // 1. The genres fill the <select>, since a release must belong to one
+  const { rows: genres } = await pool.query(
+    "SELECT * FROM genres ORDER BY name",
+  );
+
+  // 2. An empty `release` so the form starts blank
+  res.render("releases/new", { release: {}, genres, error: null });
+};
+
+// POST /releases -> saves the submitted form
+exports.create = async (req, res) => {
+  // 1. Clean the input once, then use the clean values everywhere
+  const title = (req.body.title ?? "").trim();
+  const artist = (req.body.artist ?? "").trim();
+  const cover_url = req.body.cover_url?.trim()
+    ? req.body.cover_url.trim()
+    : null;
+  const year = req.body.year === "" ? null : req.body.year;
+  const price = req.body.price === "" ? null : req.body.price;
+  const genre_id = req.body.genre_id;
+  const stock = req.body.stock === "" ? 0 : req.body.stock;
+
+  // Helper: re-show the form with a message and what the user already typed.
+  // Async because it re-queries genres for the <select>.
+  const showError = async (status, error) => {
+    const { rows: genres } = await pool.query(
+      "SELECT * FROM genres ORDER BY name",
+    );
+    res.status(status).render("releases/new", {
+      error,
+      release: { title, artist, genre_id, year, price, stock, cover_url },
+      genres,
+    });
+  };
+
+  // 2. Validate before touching the database
+  if (!title || !artist || !genre_id) {
+    return await showError(400, "Title, artist and genre are required.");
+  }
+
+  // 3. Save. All seven columns, seven values, same order.
+  try {
+    await pool.query(
+      `INSERT INTO releases (title, artist, genre_id, year, price, stock, cover_url)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      [title, artist, genre_id, year, price, stock, cover_url],
+    );
+    res.redirect("/releases");
+  } catch (err) {
+    // 23503 = foreign_key_violation: the chosen genre no longer exists
+    if (err.code === "23503") {
+      return await showError(409, "That genre no longer exists. Pick another.");
+    }
+    throw err;
+  }
 };
 
 /*
