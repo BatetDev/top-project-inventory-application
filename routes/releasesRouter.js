@@ -16,6 +16,6 @@ router.get("/:id/edit", releasesController.editForm);
 router.post("/:id/edit", releasesController.update);
 
 // DELETE
-// router.post("/:id/delete", releasesController.remove);
+router.post("/:id/delete", releasesController.remove);
 
 module.exports = router;

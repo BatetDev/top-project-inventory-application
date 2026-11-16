@@ -172,6 +172,50 @@ exports.update = async (req, res) => {
   }
 };
 
+// POST /releases/:id/delete
+exports.remove = async (req, res) => {
+  // 1. Read the id from the URL
+  const { id } = req.params;
+  // 2. Delete the row. rowCount = how many rows were deleted
+  const result = await pool.query("DELETE FROM releases WHERE id = $1", [id]);
+
+  // 3. Nothing deleted: no release has this id
+  if (result.rowCount === 0) {
+    return res.status(404).send("Release not found");
+  }
+  // 4. Success: the release page no longer exists, so go back to the list
+  res.redirect("/releases");
+};
+
+/*
+// POST /genres/:id/delete -> delete the genre
+exports.remove = async (req, res) => {
+  // 1. Read the id from the URL
+  const { id } = req.params;
+  try {
+    // 2. Delete the row. rowCount = how many rows were deleted
+    const result = await pool.query('DELETE FROM genres WHERE id = $1', [id]);
+
+    // 3. Nothing deleted: no genre has this id
+    if (result.rowCount === 0) {
+      return res.status(404).send('Genre not found');
+    }
+
+    // 4. Success: the genre page no longer exists, so go back to the list
+    res.redirect('/genres');
+  } catch (err) {
+    // 23001 = restrict_violation (ON DELETE RESTRICT)
+    if (err.code === '23001') {
+      return renderShow(res, id, {
+        status: 409,
+        error: 'This genre still has releases. Delete or move them first.',
+      });
+    }
+    throw err;
+  }
+};
+*/
+
 /*
 title, artist, genre_id, year, price, stock, cover_url
 // GET /genres/:id/edit -> show the edit form, pre-filled
