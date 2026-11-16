@@ -10,7 +10,7 @@
     <h1>New genre</h1>
 
     <% if (error) { %>
-      <p class="error"><%= error %></p>
+    <p class="error"><%= error %></p>
     <% } %>
 
     <form method="POST" action="/genres">
@@ -18,7 +18,8 @@
       <input type="text" name="name" id="name" value="<%= name %>" required />
 
       <label for="description">Description</label>
-      <textarea name="description" id="description"><%= description %></textarea>
+      <textarea name="description" id="description">
+<%= description %></textarea>
 
       <button type="submit">Create genre</button>
       <a href="/genres">Cancel</a>

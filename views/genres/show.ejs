@@ -9,43 +9,55 @@
   <body>
     <h1><%= genre.name %></h1>
     <% if (error) { %>
-      <p class="error"><%= error %> </p>
+    <p class="error"><%= error %></p>
     <% } %>
 
     <% if (genre.description) { %>
-      <p><%= genre.description %></p>
+    <p><%= genre.description %></p>
     <% } %>
 
     <div class="genre-actions">
       <a href="/genres/<%= genre.id %>/edit" class="button">Edit</a>
 
-      <form action="/genres/<%= genre.id %>/delete" method="POST" onsubmit="return confirm('Delete this genre?')">
+      <form
+        action="/genres/<%= genre.id %>/delete"
+        method="POST"
+        onsubmit="return confirm('Delete this genre?');"
+      >
         <button type="submit">Delete</button>
       </form>
     </div>
 
     <% if (releases.length === 0) { %>
-      <p>No releases for <%= genre.name %> yet.</p>
+    <p>No releases for <%= genre.name %> yet.</p>
     <% } else { %>
-      <ul class="releases-list">
-        <% releases.forEach((release) => { %>
-          <li class="release">
-            <% if (release.cover_url) { %>
-              <img class="release-cover" src="<%= release.cover_url %>" alt="Cover of <%= release.title %>" />
-            <% } else { %>
-              <img class="release-cover" src="/images/no-cover.png" alt="No cover available" />
-            <% } %>
-            <h2 class="release-title">
-              <a href="/releases/<%= release.id %>"><%= release.title %></a>
-            </h2>
-            <p class="release-artist"><%= release.artist %></p>
-            <p class="release-meta">
-              <% if (release.year) { %><%= release.year %> · <% } %>
-              $<%= release.price %> · <%= release.stock %> in stock
-            </p>
-          </li>
-        <% }) %>
-      </ul>
+    <ul class="releases-list">
+      <% releases.forEach((release) => { %>
+      <li class="release">
+        <% if (release.cover_url) { %>
+        <img
+          class="release-cover"
+          src="<%= release.cover_url %>"
+          alt="Cover of <%= release.title %>"
+        />
+        <% } else { %>
+        <img
+          class="release-cover"
+          src="/images/no-cover.png"
+          alt="No cover available"
+        />
+        <% } %>
+        <h2 class="release-title">
+          <a href="/releases/<%= release.id %>"><%= release.title %></a>
+        </h2>
+        <p class="release-artist"><%= release.artist %></p>
+        <p class="release-meta">
+          <% if (release.year) { %><%= release.year %> · <% } %> $<%=
+          release.price %> · <%= release.stock %> in stock
+        </p>
+      </li>
+      <% }) %>
+    </ul>
     <% } %>
 
     <a href="/genres" class="button">Back to genres</a>

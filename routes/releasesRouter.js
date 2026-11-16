@@ -3,16 +3,15 @@ const releasesController = require('../controllers/releasesController');
 
 const router = express.Router();
 
+// CREATE
+
 // READ
 router.get('/', releasesController.index); // GET /releases -> list all releases
+router.get('/:id', releasesController.show); // GET /releases/:id -> one release + its details
 
 module.exports = router;
 
 /*
-const express = require('express');
-const genresController = require('../controllers/genresController');
-
-const router = express.Router();
 
 // All paths are relative to /genres (mounted in app.js)
 

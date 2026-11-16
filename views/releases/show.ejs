@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= release.title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <article class="release-detail">
+        <% if (release.cover_url) { %>
+        <img
+          class="release-cover"
+          src="<%= release.cover_url %>"
+          alt="Cover of <%= release.title %>"
+        />
+        <% } else { %>
+        <img
+          class="release-cover"
+          src="/images/no-cover.png"
+          alt="No cover available"
+        />
+        <% } %>
+
+        <h1 class="release-title"><%= release.title %></h1>
+        <p class="release-artist"><%= release.artist %></p>
+        <p class="release-genre">
+          <a href="/genres/<%= release.genre_id %>"
+            ><%= release.genre_name %></a
+          >
+        </p>
+        <p class="release-meta">
+          <% if (release.year) { %><%= release.year %> · <% } %> <% if
+          (release.price !== null) { %>$<%= release.price %> · <% } %> <%=
+          release.stock %> in stock
+        </p>
+
+        <div class="release-actions">
+          <a href="/releases/<%= release.id %>/edit" class="button">Edit</a>
+
+          <form
+            action="/releases/<%= release.id %>/delete"
+            method="POST"
+            onsubmit="return confirm('Delete this release?');"
+          >
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      </article>
+
+      <a href="/releases" class="button">Back to releases</a>
+    </main>
+  </body>
+</html>

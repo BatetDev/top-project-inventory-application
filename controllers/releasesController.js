@@ -14,6 +14,32 @@ exports.index = async (req, res) => {
   res.render('releases/index', { releases });
 };
 
+// GET /releases/:id -> one release, with its genre's name
+exports.show = async (req, res) => {
+  // 1. The id from the URL, e.g. /releases/3 -> "3"
+  const { id } = req.params;
+
+  // 2. Find the release, joined with its genre so we can show the name
+  const { rows } = await pool.query(
+    `
+    SELECT r.*, g.name AS genre_name
+    FROM releases r
+    JOIN genres g ON g.id = r.genre_id
+    WHERE r.id = $1
+    `,
+    [id],
+  );
+  const release = rows[0]; // undefined if no release has this id
+
+  // 3. No match: respond with 404 and stop
+  if (!release) {
+    return res.status(404).send('Release not found');
+  }
+
+  // 4. Hand it to views/releases/show.ejs
+  res.render('releases/show', { release });
+};
+
 /*
 const pool = require('../db/pool');
 
