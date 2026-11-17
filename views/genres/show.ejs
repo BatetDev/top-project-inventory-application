@@ -60,7 +60,9 @@
         />
         <% } %>
         <h2 class="release-title">
-          <a href="/releases/<%= release.id %>"><%= release.title %></a>
+          <a class="card-link" href="/releases/<%= release.id %>"
+            ><%= release.title %></a
+          >
         </h2>
         <p class="release-artist"><%= release.artist %></p>
         <div class="release-meta">

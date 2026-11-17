@@ -22,12 +22,34 @@
   grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
 }
 
+.genre:hover,
+.release:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(43, 33, 24, 0.12);
+}
+
 .genre,
 .release {
+  position: relative;
   background-color: var(--paper-light);
   border: 1px solid var(--gold-soft);
   border-radius: var(--radius);
   padding: var(--space-md);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.card-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+}
+
+.card-link-secondary {
+  position: relative;
+  z-index: 1;
 }
 
 .release-detail {
