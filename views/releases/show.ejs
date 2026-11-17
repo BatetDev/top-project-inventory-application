@@ -55,7 +55,14 @@
         </div>
       </article>
 
-      <a href="/releases" class="button">Back to releases</a>
+      <div class="action-group">
+        <a
+          href="/genres/<%= release.genre_id %>"
+          class="button button--secondary"
+          >Back to <%= release.genre_name %></a
+        >
+        <a href="/releases" class="button button--secondary">All releases</a>
+      </div>
     </main>
   </body>
 </html>
