@@ -19,20 +19,26 @@
     <% } %>
 
     <% if (genre.description) { %>
-    <p><%= genre.description %></p>
+    <p class="genre-description"><%= genre.description %></p>
     <% } %>
 
     <div class="genre-actions">
-      <a href="/genres/<%= genre.id %>/edit" class="button">Edit</a>
-
-      <form
-        action="/genres/<%= genre.id %>/delete"
-        method="POST"
-        onsubmit="return confirm('Delete this genre?');"
-      >
-        <button type="submit">Delete</button>
-      </form>
+      <div class="action-group">
+        <a href="/genres/<%= genre.id %>/edit" class="button">Edit genre</a>
+        <form
+          action="/genres/<%= genre.id %>/delete"
+          method="POST"
+          onsubmit="return confirm('Delete this genre?');"
+        >
+          <button type="submit">Delete genre</button>
+        </form>
+      </div>
+      <a href="/genres" class="button button--secondary">Back to genres</a>
     </div>
+
+    <h2 class="section-heading">
+      <%= genre.name %> releases in inventory: <%= releases.length %>
+    </h2>
 
     <% if (releases.length === 0) { %>
     <p>No releases for <%= genre.name %> yet.</p>
@@ -57,15 +63,18 @@
           <a href="/releases/<%= release.id %>"><%= release.title %></a>
         </h2>
         <p class="release-artist"><%= release.artist %></p>
-        <p class="release-meta">
-          <% if (release.year) { %><%= release.year %> · <% } %> $<%=
-          release.price %> · <%= release.stock %> in stock
-        </p>
+        <div class="release-meta">
+          <% if (release.year) { %><span><%= release.year %></span><% } %>
+          <% if (release.price !== null) { %><span>$<%= release.price %></span
+          ><% } %>
+          <span
+            ><%= release.stock %>
+            in stock</span
+          >
+        </div>
       </li>
       <% }) %>
     </ul>
     <% } %>
-
-    <a href="/genres" class="button">Back to genres</a>
   </body>
 </html>
