@@ -139,6 +139,23 @@ button:hover {
   margin: 0 0 var(--space-xs);
 }
 
+.release-detail h1 {
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.release-detail .release-meta {
+  justify-content: center;
+  gap: var(--space-lg);
+}
+
+.release-detail .release-meta span {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
 .release-genre,
 .release-year,
 .release-meta {
@@ -185,4 +202,19 @@ button:hover {
   height: auto;
   aspect-ratio: 1;
   margin-bottom: var(--space-md);
+}
+
+.release-detail .release-actions,
+.release-detail .genre-actions {
+  justify-content: center;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.release-detail .release-actions .action-group:last-child {
+  flex-direction: column;
+}
+
+.release-detail .release-actions {
+  gap: var(--space-lg);
 }

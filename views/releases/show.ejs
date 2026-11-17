@@ -36,33 +36,34 @@
             ><%= release.genre_name %></a
           >
         </p>
-        <p class="release-meta">
-          <% if (release.year) { %><%= release.year %> · <% } %> <% if
-          (release.price !== null) { %>$<%= release.price %> · <% } %> <%=
-          release.stock %> in stock
-        </p>
-
-        <div class="release-actions">
-          <a href="/releases/<%= release.id %>/edit" class="button">Edit</a>
-
-          <form
-            action="/releases/<%= release.id %>/delete"
-            method="POST"
-            onsubmit="return confirm('Delete this release?');"
+        <div class="release-meta">
+          <% if (release.year) { %><span><%= release.year %></span><% } %>
+          <% if (release.price !== null) { %><span>$<%= release.price %></span
+          ><% } %>
+          <span
+            ><%= release.stock %>
+            in stock</span
           >
-            <button type="submit">Delete</button>
-          </form>
         </div>
-      </article>
 
-      <div class="action-group">
-        <a
-          href="/genres/<%= release.genre_id %>"
-          class="button button--secondary"
-          >Back to <%= release.genre_name %></a
-        >
-        <a href="/releases" class="button button--secondary">All releases</a>
-      </div>
+       <div class="release-actions">
+  <div class="action-group">
+    <a href="/releases/<%= release.id %>/edit" class="button">Edit</a>
+    <form
+      action="/releases/<%= release.id %>/delete"
+      method="POST"
+      onsubmit="return confirm('Delete this release?');"
+    >
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+  <div class="action-group">
+    <a href="/genres/<%= release.genre_id %>" class="button button--secondary"
+      >Back to <%= release.genre_name %></a
+    >
+    <a href="/releases" class="button button--secondary">All releases</a>
+  </div>
+</div>
     </main>
   </body>
 </html>
