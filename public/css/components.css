@@ -10,11 +10,22 @@
 }
 
 /* Buttons — .button is on links, plain <button> is in forms */
+button {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+}
+
 .button,
 button {
   display: inline-block;
   font-family: var(--font-heading);
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -26,9 +37,9 @@ button {
   cursor: pointer;
   text-decoration: none;
   transition:
-    background-color 0.15s ease,
-    color 0.15s ease,
-    border-color 0.15s ease;
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .button:hover,
@@ -45,8 +56,15 @@ button:hover {
 }
 
 .button--secondary:hover {
-  background-color: var(--parchment-deep);
-  color: var(--rubric-dark);
+  background-color: var(--rubric);
+  border-color: var(--rubric);
+  color: var(--parchment);
+}
+
+.button--invert:hover {
+  background-color: var(--parchment);
+  border-color: var(--rubric);
+  color: var(--rubric);
 }
 
 .action-group {

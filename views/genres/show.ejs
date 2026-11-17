@@ -24,7 +24,9 @@
 
     <div class="genre-actions">
       <div class="action-group">
-        <a href="/genres/<%= genre.id %>/edit" class="button">Edit genre</a>
+        <a href="/genres/<%= genre.id %>/edit" class="button button--invert"
+          >Edit genre</a
+        >
         <form
           action="/genres/<%= genre.id %>/delete"
           method="POST"

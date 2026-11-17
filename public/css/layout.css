@@ -32,7 +32,7 @@
 .release {
   position: relative;
   background-color: var(--paper-light);
-  border: 1px solid var(--gold-soft);
+  border: 2px solid var(--gold-soft);
   border-radius: var(--radius);
   padding: var(--space-md);
   transition:
