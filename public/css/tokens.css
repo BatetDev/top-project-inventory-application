@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Tokens
+   ========================================================================== */
+
+:root {
+  /* Palette — Manuscript */
+  --parchment: #f4ecd8;
+  --parchment-deep: #e8dcc0;
+  --ink: #2b2118;
+  --ink-soft: #5a4a3a;
+  --rubric: #7a2033;
+  --rubric-dark: #5e1826;
+  --gold: #a67c00;
+  --gold-soft: #c9a94e;
+
+  /* Type */
+  --font-heading: "Cinzel", "Times New Roman", serif;
+  --font-body: "EB Garamond", Georgia, serif;
+
+  /* Scale */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --radius: 4px;
+  --max-width: 72rem;
+}

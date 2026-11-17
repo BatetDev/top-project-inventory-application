@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.page-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.genre-list {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+}
+
+.release-list,
+.releases-list {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+}
+
+.genre,
+.release {
+  background-color: var(--parchment-deep);
+  border: 1px solid var(--gold-soft);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+}
+
+.release-detail {
+  display: grid;
+  gap: var(--space-lg);
+  grid-template-columns: 240px 1fr;
+  align-items: start;
+}
+
+@media (max-width: 40rem) {
+  .release-detail {
+    grid-template-columns: 1fr;
+  }
+}
