@@ -17,6 +17,7 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   font-size: 1.0625rem;
+  font-weight: 500;
   line-height: 1.6;
 }
 
@@ -24,7 +25,7 @@ h1,
 h2,
 h3 {
   font-family: var(--font-heading);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
   color: var(--ink);
 }

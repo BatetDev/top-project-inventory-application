@@ -24,7 +24,7 @@
 
 .genre,
 .release {
-  background-color: var(--parchment-deep);
+  background-color: var(--paper-light);
   border: 1px solid var(--gold-soft);
   border-radius: var(--radius);
   padding: var(--space-md);
