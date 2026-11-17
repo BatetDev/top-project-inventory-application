@@ -16,8 +16,8 @@
     <h1>Releases</h1>
 
     <div class="page-actions">
-      <a href="/releases/new" class="button">New release</a>
-      <a href="/genres" class="button">Browse genres</a>
+      <a href="/releases/new" class="button button--invert">New release</a>
+      <a href="/genres" class="button button--secondary">Browse genres</a>
     </div>
 
     <% if (releases.length === 0) { %>
@@ -56,13 +56,16 @@
             ><%= release.genre_name %></a
           >
         </p>
-        <% if (release.year) { %>
-        <p class="release-year"><%= release.year %></p>
-        <% } %>
-        <% if (release.price !== null) { %>
-        <p class="release-price">$<%= release.price %></p>
-        <% } %>
-        <p class="release-stock"><%= release.stock %> in stock</p>
+
+        <div class="release-meta">
+          <% if (release.year) { %><span><%= release.year %></span><% } %>
+          <% if (release.price !== null) { %><span>$<%= release.price %></span
+          ><% } %>
+          <span
+            ><%= release.stock %>
+            in stock</span
+          >
+        </div>
       </li>
       <% }) %>
     </ul>
