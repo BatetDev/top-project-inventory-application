@@ -49,3 +49,16 @@ form button[type="submit"] {
   align-self: flex-start;
   margin-top: var(--space-md);
 }
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.form-actions button[type="submit"] {
+  margin-top: 0;
+  align-self: auto;
+}

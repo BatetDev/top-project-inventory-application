@@ -45,8 +45,10 @@
       <label for="cover_url">Cover URL</label>
       <input type="text" name="cover_url" id="cover_url" value="<%= release.cover_url %>" />
 
-      <button type="submit">Create release</button>
-      <a href="/releases">Cancel</a>
+      <div class="form-actions">
+        <a href="/releases" class="button button--secondary">Cancel</a>
+        <button type="submit">Create release</button>
+      </div>
     </form>
   </body>
 </html>
