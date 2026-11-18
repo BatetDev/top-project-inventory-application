@@ -222,7 +222,6 @@ button:hover {
 }
 
 .release-genre,
-.release-year,
 .release-meta {
   font-size: 1.2rem;
   font-weight: 600;
@@ -243,14 +242,6 @@ button:hover {
   padding-top: var(--space-sm);
   border-top: 1px solid var(--gold-soft);
   font-size: 0.95rem;
-}
-
-.release-price,
-.release-stock {
-  display: inline;
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--ink-soft);
 }
 
 /* Cover */
