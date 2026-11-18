@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // Seed script: drops, recreates and fills the inventory tables.
-// Usage: node populatedb.js   (needs DATABASE_URL in your environment / .env)
+// Usage: npm run seed   (needs DATABASE_URL in .env or the environment)
 
 const { Client } = require("pg");
 

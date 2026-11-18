@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../partials/head', { title: 'Genres — Old Ink Records' }) %>
+    <%- include('../partials/head', { title: `${release.title} — Old Ink Records` }) %>
   </head>
   <body>
     <%- include('../partials/header') %>
@@ -40,7 +40,7 @@
 
        <div class="release-actions">
   <div class="action-group">
-    <a href="/releases/<%= release.id %>/edit" class="button">Edit</a>
+    <a href="/releases/<%= release.id %>/edit" class="button button--invert">Edit</a>
     <form
       action="/releases/<%= release.id %>/delete"
       method="POST"

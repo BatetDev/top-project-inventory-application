@@ -3,13 +3,15 @@ const releasesController = require("../controllers/releasesController");
 
 const router = express.Router();
 
-// CREATE
-router.get("/new", releasesController.newForm); // GET /releases/new -> show the empty form
-router.post("/", releasesController.create); // POST /releases -> saves the submitted form
+// All paths are relative to /releases (mounted in app.js).
+
+// CREATE: fixed paths first, so '/new' isn't read as an :id
+router.get("/new", releasesController.newForm);
+router.post("/", releasesController.create);
 
 // READ
-router.get("/", releasesController.index); // GET /releases -> list all releases
-router.get("/:id", releasesController.show); // GET /releases/:id -> one release + its details
+router.get("/", releasesController.index);
+router.get("/:id", releasesController.show);
 
 // UPDATE
 router.get("/:id/edit", releasesController.editForm);

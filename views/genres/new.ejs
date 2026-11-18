@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include('../partials/head', { title: 'Genres — Old Ink Records' }) %>
+    <%- include('../partials/head', { title: 'New genre — Old Ink Records' }) %>
   </head>
   <body>
     <%- include('../partials/header') %>
@@ -15,10 +15,10 @@
         <input type="text" name="name" id="name" value="<%= name %>" required />
         <label for="description">Description</label>
         <textarea name="description" id="description">
-      <%= description %></textarea>
+<%= description %></textarea>
         <div class="form-actions">
           <a href="/genres" class="button button--secondary">Cancel</a>
-          <button type="submit">Create genre</button>
+          <button type="submit" class="button--invert">Create genre</button>
         </div>
       </form>
     </main>
