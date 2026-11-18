@@ -2,6 +2,60 @@
    Components
    ========================================================================== */
 
+/* ==========================================================================
+   Site header
+   ========================================================================== */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--gold-soft);
+}
+
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+
+.site-brand:hover {
+  border-bottom-color: transparent;
+}
+
+.site-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.site-nav {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.site-nav a {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--rubric);
+}
+
+.site-nav a:hover {
+  color: var(--rubric-dark);
+}
+
 .section-heading {
   font-size: 1.1rem;
   padding-top: var(--space-md);
@@ -217,4 +271,36 @@ button:hover {
 
 .release-detail .release-actions {
   gap: var(--space-lg);
+}
+
+/* ==========================================================================
+   Site footer
+   ========================================================================== */
+
+.site-footer {
+  margin-top: var(--space-xl);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--gold-soft);
+  text-align: center;
+}
+
+.site-footer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.site-footer-link:hover {
+  color: var(--rubric);
+  border-bottom-color: transparent;
+}
+
+.site-footer-icon {
+  display: block;
 }

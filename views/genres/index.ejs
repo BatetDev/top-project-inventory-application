@@ -13,29 +13,32 @@
     />
   </head>
   <body>
-    <h1>Genres</h1>
-    <div class="page-actions">
-      <a href="/genres/new" class="button">New genre</a>
-      <a href="/releases" class="button button--secondary">Browse releases</a>
-    </div>
-
-    <% if (genres.length === 0) { %>
-    <p>No genres yet.</p>
-    <% } else { %>
-    <ul class="genre-list">
-      <% genres.forEach((genre) => { %>
-      <li class="genre">
-        <h2 class="genre-name">
-          <a class="card-link" href="/genres/<%= genre.id %>"
-            ><%= genre.name %></a
-          >
-        </h2>
-        <% if (genre.description) { %>
-        <p class="genre-description"><%= genre.description %></p>
-        <% } %>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+    <%- include('../partials/header') %>
+    <main>
+      <h1>Genres</h1>
+      <div class="page-actions">
+        <a href="/genres/new" class="button">New genre</a>
+        <a href="/releases" class="button button--secondary">Browse releases</a>
+      </div>
+      <% if (genres.length === 0) { %>
+      <p>No genres yet.</p>
+      <% } else { %>
+      <ul class="genre-list">
+        <% genres.forEach((genre) => { %>
+        <li class="genre">
+          <h2 class="genre-name">
+            <a class="card-link" href="/genres/<%= genre.id %>"
+              ><%= genre.name %></a
+            >
+          </h2>
+          <% if (genre.description) { %>
+          <p class="genre-description"><%= genre.description %></p>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </main>
+    <%- include('../partials/footer') %>
   </body>
 </html>

@@ -13,62 +13,64 @@
     />
   </head>
   <body>
-    <h1>Releases</h1>
-
-    <div class="page-actions">
-      <a href="/releases/new" class="button button--invert">New release</a>
-      <a href="/genres" class="button button--secondary">Browse genres</a>
-    </div>
-
-    <% if (releases.length === 0) { %>
-    <p>No releases yet.</p>
-    <% } else { %>
-    <ul class="release-list">
-      <% releases.forEach((release) => { %>
-      <li class="release">
-        <% if (release.cover_url) { %>
-        <img
-          class="release-cover"
-          src="<%= release.cover_url %>"
-          alt="Cover of <%= release.title %>"
-          width="150"
-          height="150"
-          loading="lazy"
-        />
-        <% } else { %>
-        <img
-          class="release-cover"
-          src="/images/no-cover.webp"
-          alt="No cover available"
-          width="150"
-          height="150"
-        />
-        <% } %>
-
-        <h2 class="release-title">
-          <a class="card-link" href="/releases/<%= release.id %>"
-            ><%= release.title %></a
-          >
-        </h2>
-        <p class="release-artist"><%= release.artist %></p>
-        <p class="release-genre">
-          <a class="card-link-secondary" href="/genres/<%= release.genre_id %>"
-            ><%= release.genre_name %></a
-          >
-        </p>
-
-        <div class="release-meta">
-          <% if (release.year) { %><span><%= release.year %></span><% } %>
-          <% if (release.price !== null) { %><span>$<%= release.price %></span
-          ><% } %>
-          <span
-            ><%= release.stock %>
-            in stock</span
-          >
-        </div>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+    <%- include('../partials/header') %>
+    <main>
+      <h1>Releases</h1>
+      <div class="page-actions">
+        <a href="/releases/new" class="button button--invert">New release</a>
+        <a href="/genres" class="button button--secondary">Browse genres</a>
+      </div>
+      <% if (releases.length === 0) { %>
+      <p>No releases yet.</p>
+      <% } else { %>
+      <ul class="release-list">
+        <% releases.forEach((release) => { %>
+        <li class="release">
+          <% if (release.cover_url) { %>
+          <img
+            class="release-cover"
+            src="<%= release.cover_url %>"
+            alt="Cover of <%= release.title %>"
+            width="150"
+            height="150"
+            loading="lazy"
+          />
+          <% } else { %>
+          <img
+            class="release-cover"
+            src="/images/no-cover.webp"
+            alt="No cover available"
+            width="150"
+            height="150"
+          />
+          <% } %>
+          <h2 class="release-title">
+            <a class="card-link" href="/releases/<%= release.id %>"
+              ><%= release.title %></a
+            >
+          </h2>
+          <p class="release-artist"><%= release.artist %></p>
+          <p class="release-genre">
+            <a
+              class="card-link-secondary"
+              href="/genres/<%= release.genre_id %>"
+              ><%= release.genre_name %></a
+            >
+          </p>
+          <div class="release-meta">
+            <% if (release.year) { %><span><%= release.year %></span><% } %>
+            <% if (release.price !== null) { %><span>$<%= release.price %></span
+            ><% } %>
+            <span
+              ><%= release.stock %>
+              in stock</span
+            >
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </main>
+    <%- include('../partials/footer') %>
   </body>
 </html>

@@ -13,72 +13,72 @@
     />
   </head>
   <body>
-    <h1><%= genre.name %></h1>
-    <% if (error) { %>
-    <p class="error"><%= error %></p>
-    <% } %>
-
-    <% if (genre.description) { %>
-    <p class="genre-description"><%= genre.description %></p>
-    <% } %>
-
-    <div class="genre-actions">
-      <div class="action-group">
-        <a href="/genres/<%= genre.id %>/edit" class="button button--invert"
-          >Edit genre</a
-        >
-        <form
-          action="/genres/<%= genre.id %>/delete"
-          method="POST"
-          onsubmit="return confirm('Delete this genre?');"
-        >
-          <button type="submit">Delete genre</button>
-        </form>
-      </div>
-      <a href="/genres" class="button button--secondary">Back to genres</a>
-    </div>
-
-    <h2 class="section-heading">
-      <%= genre.name %> releases in inventory: <%= releases.length %>
-    </h2>
-
-    <% if (releases.length === 0) { %>
-    <p>No releases for <%= genre.name %> yet.</p>
-    <% } else { %>
-    <ul class="releases-list">
-      <% releases.forEach((release) => { %>
-      <li class="release">
-        <% if (release.cover_url) { %>
-        <img
-          class="release-cover"
-          src="<%= release.cover_url %>"
-          alt="Cover of <%= release.title %>"
-        />
-        <% } else { %>
-        <img
-          class="release-cover"
-          src="/images/no-cover.webp"
-          alt="No cover available"
-        />
-        <% } %>
-        <h2 class="release-title">
-          <a class="card-link" href="/releases/<%= release.id %>"
-            ><%= release.title %></a
+    <%- include('../partials/header') %>
+    <main>
+      <h1><%= genre.name %></h1>
+      <% if (error) { %>
+      <p class="error"><%= error %></p>
+      <% } %>
+      <% if (genre.description) { %>
+      <p class="genre-description"><%= genre.description %></p>
+      <% } %>
+      <div class="genre-actions">
+        <div class="action-group">
+          <a href="/genres/<%= genre.id %>/edit" class="button button--invert"
+            >Edit genre</a
           >
-        </h2>
-        <p class="release-artist"><%= release.artist %></p>
-        <div class="release-meta">
-          <% if (release.year) { %><span><%= release.year %></span><% } %>
-          <% if (release.price !== null) { %><span>$<%= release.price %></span
-          ><% } %>
-          <span
-            ><%= release.stock %>
-            in stock</span
+          <form
+            action="/genres/<%= genre.id %>/delete"
+            method="POST"
+            onsubmit="return confirm('Delete this genre?');"
           >
+            <button type="submit">Delete genre</button>
+          </form>
         </div>
-      </li>
-      <% }) %>
-    </ul>
-    <% } %>
+        <a href="/genres" class="button button--secondary">Back to genres</a>
+      </div>
+      <h2 class="section-heading">
+        <%= genre.name %> releases in inventory: <%= releases.length %>
+      </h2>
+      <% if (releases.length === 0) { %>
+      <p>No releases for <%= genre.name %> yet.</p>
+      <% } else { %>
+      <ul class="releases-list">
+        <% releases.forEach((release) => { %>
+        <li class="release">
+          <% if (release.cover_url) { %>
+          <img
+            class="release-cover"
+            src="<%= release.cover_url %>"
+            alt="Cover of <%= release.title %>"
+          />
+          <% } else { %>
+          <img
+            class="release-cover"
+            src="/images/no-cover.webp"
+            alt="No cover available"
+          />
+          <% } %>
+          <h2 class="release-title">
+            <a class="card-link" href="/releases/<%= release.id %>"
+              ><%= release.title %></a
+            >
+          </h2>
+          <p class="release-artist"><%= release.artist %></p>
+          <div class="release-meta">
+            <% if (release.year) { %><span><%= release.year %></span><% } %>
+            <% if (release.price !== null) { %><span>$<%= release.price %></span
+            ><% } %>
+            <span
+              ><%= release.stock %>
+              in stock</span
+            >
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+      <% } %>
+    </main>
+    <%- include('../partials/footer') %>
   </body>
 </html>
