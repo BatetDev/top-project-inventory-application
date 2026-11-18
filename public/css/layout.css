@@ -62,3 +62,20 @@
   max-width: 34rem;
   margin-inline: auto;
 }
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding-bottom: var(--space-sm);
+  margin-bottom: var(--space-lg);
+  border-bottom: 2px solid var(--gold-soft);
+}
+
+.page-header h1 {
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}

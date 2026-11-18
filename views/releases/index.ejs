@@ -6,10 +6,9 @@
   <body>
     <%- include('../partials/header') %>
     <main>
-      <h1>Releases</h1>
-      <div class="page-actions">
+      <div class="page-header">
+        <h1>Releases</h1>
         <a href="/releases/new" class="button button--invert">New release</a>
-        <a href="/genres" class="button button--secondary">Browse genres</a>
       </div>
       <% if (releases.length === 0) { %>
       <p>No releases yet.</p>
