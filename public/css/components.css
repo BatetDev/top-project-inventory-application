@@ -56,6 +56,13 @@
   color: var(--rubric-dark);
 }
 
+@media (max-width: 30rem) {
+  .site-header {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .section-heading {
   font-size: 1.1rem;
   padding-top: var(--space-md);
@@ -164,6 +171,10 @@ button:hover {
 .release-actions button:hover {
   background-color: var(--rubric);
   color: var(--parchment);
+}
+
+.genre-actions {
+  justify-content: center;
 }
 
 /* Error message */
